@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  =teamName=_=serviceName=_=serviceVersion=.=serviceBuild=:
+    build:
+      context: .
+      args:
+        VERSION: =serviceVersion=
+        BUILD: =serviceBuild=
+        IP_HOST: =ipHost=
+        PORT: =portHost=
+    stdin_open: true
+    tty: true
+    ports:
+      - =portHost=:=portHost=
+    restart: always
+    container_name: =teamName=_=serviceName=_=serviceVersion=.=serviceBuild=
+    volumes:
+      - ../volume:/opt/=serviceName=
+    ulimits:
+      memlock: -1
+      nofile: 100000
+      nproc: 32768
