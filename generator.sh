@@ -101,9 +101,9 @@ sed -e s/=serviceName=/"${TOOL}"/g \
     -e s/=serviceBuild=/"${BUILD}"/g \
     -e s/=portHost=/"${PORT}"/g \
     -e s/=portContainer=/"${PORT}"/g \
-    -e s/=ipHost=/"${IP_HOST}"/g  <  dockerfilesTemplates/"${DOCKER_COMPOSE_FILE_NAME}" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
+    -e s/=ipHost=/"${IP_HOST}"/g  <  dockerFileTemplates/"${DOCKER_COMPOSE_FILE_NAME}" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
 
-cp dockerfilesTemplates/"${TOOL}"/Dockerfile  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/Dockerfile"
+cp dockerFileTemplates/"${TOOL}"/Dockerfile  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/Dockerfile"
 
 tree "${TEAM}"
 
