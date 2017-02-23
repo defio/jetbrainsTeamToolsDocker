@@ -17,6 +17,9 @@ services:
     container_name: =teamName=_=serviceName=_=serviceVersion=.=serviceBuild=
     volumes:
       - ../volume:/opt/=serviceName=
+=exportAndroidHome=      - =hostAndroidHome=:/opt/androidSDK
+=exportAndroidHome=    environment:
+=exportAndroidHome=      - ANDROID_HOME=/opt/androidSDK
     ulimits:
       memlock: -1
       nofile: 100000
