@@ -112,7 +112,7 @@ case "${TOOL}" in
     else
         echo "ANDROID_HOME found.";
         while true; do
-        read -p "Do you want to export expose the android SDK to Upsource? y/n" yn
+        read -p "Do you want to export expose the android SDK to Upsource? y/n " yn
         case $yn in
             [Yy]* ) EXPORT_ANDROID_HOME=1; break;;
             [Nn]* ) break;;
@@ -130,15 +130,17 @@ sed -e s/=serviceName=/"${TOOL}"/g \
     -e s/=serviceBuild=/"${BUILD}"/g \
     -e s/=portHost=/"${PORT}"/g \
     -e s/=portContainer=/"${PORT}"/g \
-    -e s/=ipHost=/"${IP_HOST}"/g  <  dockerFileTemplates/"${DOCKER_COMPOSE_FILE_NAME}" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
+    -e s/=ipHost=/"${IP_HOST}"/g  <  dockerFileTemplates/"${DOCKER_COMPOSE_FILE_NAME}" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/tmp-docker-compose.yml"
 
 if [ ${EXPORT_ANDROID_HOME} -eq 1 ]; then
     sed -e s/=exportAndroidHome=/""/g \
-        -e s/=hostAndroidHome=/"${ANDROID_HOME}"/g  <  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
+        -e s/=hostAndroidHome=/"${ANDROID_HOME}"/g  <  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/tmp-docker-compose.yml" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
 else
     sed -e s/=exportAndroidHome=/"#"/g \
-        -e s/=hostAndroidHome=/"null"/g  <  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
+        -e s/=hostAndroidHome=/"null"/g  <  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/tmp-docker-compose.yml" > "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/docker-compose.yml"
 fi
+
+rm "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/tmp-docker-compose.yml"
 
 cp dockerFileTemplates/"${TOOL}"/Dockerfile  "${TEAM}"/"${TOOL}"/"${VERSION}"."${BUILD}"/"docker/Dockerfile"
 
