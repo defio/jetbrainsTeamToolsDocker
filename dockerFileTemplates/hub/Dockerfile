@@ -29,7 +29,8 @@ RUN apt-get -qqy update \
 
 # Download Hub
 RUN curl -L https://download-cf.jetbrains.com/hub/${VERSION}/hub-ring-bundle-${VERSION}.${BUILD}.zip > hub.zip \
-    && unzip hub.zip
+    && unzip hub.zip \
+    && rm hub.zip
 
 # Configure Hub
 RUN ./hub-ring-bundle-${VERSION}.${BUILD}/bin/hub.sh configure \
