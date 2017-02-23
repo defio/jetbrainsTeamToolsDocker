@@ -24,7 +24,8 @@ RUN apt-get -y update \
 # Download Youtrack
 # https://download.jetbrains.com/charisma/youtrack-7.0.29566.zip
 RUN curl -L https://download.jetbrains.com/charisma/youtrack-${VERSION}.${BUILD}.zip > youtrack.zip \
-    && unzip youtrack.zip
+    && unzip youtrack.zip \
+    && rm youtrack.zip
 
 # Configure Youtrack
 RUN ./youtrack-${VERSION}.${BUILD}/bin/youtrack.sh configure \
